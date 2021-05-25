@@ -295,15 +295,10 @@ function DisSGPATotal_cgpaper() {
     var newdiv_cgpa = document.createElement('div');
     newdiv_cgpa.innerHTML = `CGPA =  ${CGPA_cgpa-0.75 *10}`;
     document.getElementById("FinalCGPA_cgpaper").appendChild(newdiv_cgpa);
-    console.log(document.getElementById("FinalCGPA_cgpaper").value);
+
 }
 
-// function DisSGPAPer() {
-//     var newdiv = document.createElement('div');
-//     newdiv.innerHTML = `PERCENTAGE =  ${(SGPA - 0.75) *10}%`;
 
-//     document.getElementById("sgpatoper").appendChild(newdiv);
-// }
 
 
 
