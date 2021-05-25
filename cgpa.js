@@ -245,7 +245,7 @@ function TotalPer() {
         Totper = Totper + Aper[i];
     }
     Totper1 = Totper / temp;
-    return Totper1;
+    return Totper1.toPrecision(3);
 }
 
 function TotalGrad() {
@@ -293,7 +293,7 @@ function DisSGPATotal_cgpa() {
 
 function DisSGPATotal_cgpaper() {
     var newdiv_cgpa = document.createElement('div');
-    newdiv_cgpa.innerHTML = `CGPA =  ${totSubsol_cgpa} / ${totCre_cgpa} =  ${CGPA_cgpa-0.75 *10}`;
+    newdiv_cgpa.innerHTML = `CGPA =  ${CGPA_cgpa-0.75 *10}`;
     document.getElementById("FinalCGPA_cgpaper").appendChild(newdiv_cgpa);
     console.log(document.getElementById("FinalCGPA_cgpaper").value);
 }
