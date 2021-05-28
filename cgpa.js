@@ -291,14 +291,21 @@ function DisSGPATotal_cgpa() {
     document.getElementById("FinalCGPA_cgpa").appendChild(newdiv_cgpa);
 }
 
-function DisSGPATotal_cgpaper() {
+function DisCGPAPer() {
     var newdiv_cgpa = document.createElement('div');
-    newdiv_cgpa.innerHTML = `CGPA =  ${CGPA_cgpa-0.75 *10}`;
-    document.getElementById("FinalCGPA_cgpaper").appendChild(newdiv_cgpa);
+    var result = ((CGPA_cgpa - 0.75) * 10).toPrecision(4);
+    newdiv_cgpa.innerHTML = `PERCENTAGE =  ${result}%`;
 
+    document.getElementById("cgpatoper1").appendChild(newdiv_cgpa);
 }
 
 
+// function DisSGPAPer() {
+//     var newdiv = document.createElement('div');
+//     newdiv.innerHTML = `PERCENTAGE =  ${(SGPA - 0.75) *10}%`;
+
+//     document.getElementById("sgpatoper").appendChild(newdiv);
+// }
 
 
 
@@ -340,7 +347,8 @@ function calculate() {
     DisTabTotal(final1);
     DisSGPATotal();
     // DisSGPAPer();
-    DisSGPATotal_cgpaper();
+
+
     document.getElementById("Step2").style.display = "none";
     document.getElementById("Step3").style.display = "block";
     var elmnt = document.getElementById("Step3");
@@ -350,13 +358,15 @@ function calculate() {
     totCre_cgpa = CalTotCre_cgpa();
     totSubsol_cgpa = CalTotSubsol_cgpa();
     CGPA_cgpa = (totSubsol_cgpa / totCre_cgpa).toPrecision(4);
-
+    var result = ((CGPA_cgpa - 0.75) * 10).toPrecision(4);
+    DisCGPAPer();
     DisCGPA_cgpa(CGPA_cgpa);
     for (i = 0; i < total_cgpa; i++) {
         DisTable_cgpa(i);
     }
     DisTabTotal_cgpa(total_cgpa);
     DisSGPATotal_cgpa()
+
     document.getElementById("Step2_cgpa").style.display = "none";
     document.getElementById("Step3_cgpa").style.display = "block";
     var elmnt_cgpa = document.getElementById("Step3_cgpa");
@@ -404,17 +414,18 @@ var ASol_cgpa = [];
 
 function showMarks_cgpa() {
     total_cgpa = document.getElementById("total_cgpa").value;
-    //alert(total);
+
     addInput_cgpa('dynamicInput_cgpa', total_cgpa);
     document.getElementById("Step1_cgpa").style.display = "none";
     document.getElementById("Step2_cgpa").style.display = "block";
     var elmnt_cgpa = document.getElementById("Step2_cgpa");
     elmnt_cgpa.scrollIntoView();
+
 }
 
 function addInput_cgpa(divName_cgpa, counter_cgpa) {
-    for (i = 1; i <= counter_cgpa; i++) {
-        //var nid = id;
+    for (i = 1; i <= counter_cgpa - 1; i++) {
+
         var cid_cgpa = `cre_cgpa${i}`;
         var sid_cgpa = `sgp_cgpa${i}`;
         var newdiv_cgpa = document.createElement('div');
@@ -424,7 +435,7 @@ function addInput_cgpa(divName_cgpa, counter_cgpa) {
     <hr style="border: 0;
     box-shadow: 0 5px 5px -5px grey inset;height: 3px;">`;
         document.getElementById(divName_cgpa).appendChild(newdiv_cgpa);
-        ////console.log(i);
+
     }
 }
 
@@ -491,7 +502,7 @@ function DisTable_cgpa(i) {
     cell1_cgpa.innerHTML = "SEMESTER " + temp_cgpa;
     cell2_cgpa.innerHTML = ASGPA_cgpa[i];
     cell3_cgpa.innerHTML = Acre_cgpa[i];
-    cell4_cgpa.innerHTML = ASol_cgpa[i];
+    cell4_cgpa.innerHTML = ASol_cgpa[i].toFixed(2);
 }
 
 function CalTotSGPA_cgpa() {
@@ -514,14 +525,14 @@ function DisTabTotal_cgpa(i) {
     cell1_cgpa.innerHTML = "CUMMULATIVE CGPA";
     cell2_cgpa.innerHTML = CalTotSGPA_cgpa();
     cell3_cgpa.innerHTML = totCre_cgpa;
-    cell4_cgpa.innerHTML = totSubsol_cgpa;
+    cell4_cgpa.innerHTML = totSubsol_cgpa.toFixed(2);
 
 
 }
 
 function DisSGPATotal_cgpa() {
     var newdiv_cgpa = document.createElement('div');
-    newdiv_cgpa.innerHTML = `CGPA = ${totSubsol_cgpa} / ${totCre_cgpa} =  ${CGPA_cgpa}`;
+    newdiv_cgpa.innerHTML = `CGPA = ${totSubsol_cgpa.toFixed(2)} / ${totCre_cgpa} =  ${CGPA_cgpa}`;
     document.getElementById("FinalCGPA_cgpa").appendChild(newdiv_cgpa);
 }
 
