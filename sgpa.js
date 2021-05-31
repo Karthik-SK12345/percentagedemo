@@ -422,7 +422,7 @@ function showMarks_cgpa() {
 }
 
 function addInput_cgpa(divName_cgpa, counter_cgpa) {
-    for (i = 1; i <= counter_cgpa; i++) {
+    for (i = 1; i <= counter_cgpa - 1; i++) {
         //var nid = id;
         var cid_cgpa = `cre_cgpa${i}`;
         var sid_cgpa = `sgp_cgpa${i}`;
@@ -436,35 +436,31 @@ function addInput_cgpa(divName_cgpa, counter_cgpa) {
         ////console.log(i);
     }
 }
-total_cgpa = document.getElementById("total_cgpa").value;
-console.log(total_cgpa)
-if (total_cgpa <= 1) {
-    document.getElementById("Step2_cgpa").style.display = "none";
-}
+
 
 function getValue_cgpa() {
     var tempTotal_cgpa = total_cgpa;
-    for (i = 1; i <= tempTotal_cgpa; i++) {
+    for (i = 1; i <= tempTotal_cgpa - 1; i++) {
         var credid_cgpa = document.getElementById(`cre_cgpa${i}`).value;
         Acre_cgpa.push(credid_cgpa);
         var sgpaid_cgpa = document.getElementById(`sgp_cgpa${i}`).value;
         ASGPA_cgpa.push(sgpaid_cgpa);
 
 
-        console.log("Test");
-        console.log(i);
-        console.log("SGPA ID: " + sgpaid_cgpa);
-        console.log("Credit ID: " + credid_cgpa);
+        // console.log("Test");
+        // console.log(i);
+        // console.log("SGPA ID: " + sgpaid_cgpa);
+        // console.log("Credit ID: " + credid_cgpa);
 
-        console.log("Array");
-        console.log(Acre_cgpa);
-        console.log(ASGPA_cgpa);
+        // console.log("Array");
+        // console.log(Acre_cgpa);
+        // console.log(ASGPA_cgpa);
 
     }
 }
 
 function CalSubsol_cgpa() {
-    for (i = 0; i < total_cgpa; i++) {
+    for (i = 0; i < total_cgpa - 1; i++) {
         ASol_cgpa[i] = parseFloat(Acre_cgpa[i]) * parseFloat(ASGPA_cgpa[i]);
     }
     //console.log("CalSubsol :" + ASol);
@@ -472,7 +468,7 @@ function CalSubsol_cgpa() {
 
 function CalTotCre_cgpa() {
     var temtotcre_cgpa = 0;
-    for (i = 0; i < total_cgpa; i++) {
+    for (i = 0; i < total_cgpa - 1; i++) {
         temtotcre_cgpa = temtotcre_cgpa + parseFloat(Acre_cgpa[i]);
     }
     //console.log("In CalTotCre Total Credit: " + temtotcre);
@@ -481,7 +477,7 @@ function CalTotCre_cgpa() {
 
 function CalTotSubsol_cgpa() {
     var temptotsubsol_cgpa = 0;
-    for (i = 0; i < total_cgpa; i++) {
+    for (i = 0; i < total_cgpa - 1; i++) {
         temptotsubsol_cgpa = temptotsubsol_cgpa + parseFloat(ASol_cgpa[i]);
     }
     return temptotsubsol_cgpa;
@@ -498,19 +494,21 @@ function DisTable_cgpa(i) {
     var temp_cgpa = i + 1;
     var table_cgpa = document.getElementById("CGPATable_cgpa");
     var row_cgpa = table_cgpa.insertRow(temp_cgpa);
+
     var cell1_cgpa = row_cgpa.insertCell(0);
+
     var cell2_cgpa = row_cgpa.insertCell(1);
     var cell3_cgpa = row_cgpa.insertCell(2);
     var cell4_cgpa = row_cgpa.insertCell(3);
     cell1_cgpa.innerHTML = "SEMESTER " + temp_cgpa;
     cell2_cgpa.innerHTML = ASGPA_cgpa[i];
     cell3_cgpa.innerHTML = Acre_cgpa[i];
-    cell4_cgpa.innerHTML = ASol_cgpa[i].toFixed(2);
+    cell4_cgpa.innerHTML = ASol_cgpa[i];
 }
 
 function CalTotSGPA_cgpa() {
     var temptotSGPA_cgpa = 0;
-    for (i = 0; i < total_cgpa; i++) {
+    for (i = 0; i < total_cgpa - 1; i++) {
         temptotSGPA_cgpa = temptotSGPA_cgpa + parseFloat(ASGPA_cgpa[i]);
     }
     //console.log("In CalTOtSGPA total SGPA is: " + temptotSGPA);
@@ -555,7 +553,7 @@ function calculate_cgpa() {
     CGPA_cgpa = (totSubsol_cgpa / totCre_cgpa).toFixed(4);
     //console.log("CGPA is :" + CGPA);
     DisCGPA_cgpa(CGPA_cgpa);
-    for (i = 0; i < total_cgpa; i++) {
+    for (i = 0; i < total_cgpa - 1; i++) {
         DisTable_cgpa(i);
     }
     DisTabTotal_cgpa(total_cgpa);
