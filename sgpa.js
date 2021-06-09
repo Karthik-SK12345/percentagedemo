@@ -15,21 +15,25 @@ var yop = [];
 function showMarks() {
     total = document.getElementById("total").value;
     //alert(total);
-    addInput('dynamicInput', total);
+    addInput("dynamicInput", total);
     document.getElementById("Step1").style.display = "none";
     document.getElementById("Step2").style.display = "block";
     var elmnt = document.getElementById("Step2");
     elmnt.scrollIntoView();
 
     total_cgpa = document.getElementById("total_cgpa").value;
+    let doBlock = true;
+    if (parseInt(total_cgpa) == 1 || !parseInt(total_cgpa)) {
+        doBlock = false;
+    }
     //alert(total);
-    addInput_cgpa('dynamicInput_cgpa', total_cgpa);
+    addInput_cgpa("dynamicInput_cgpa", total_cgpa);
     document.getElementById("Step1_cgpa").style.display = "none";
-    document.getElementById("Step2_cgpa").style.display = "block";
+    if (doBlock)
+        document.getElementById("Step2_cgpa").style.display = "block";
     var elmnt_cgpa = document.getElementById("Step2_cgpa");
     elmnt_cgpa.scrollIntoView();
 }
-
 
 function addInput(divName, counter) {
     for (i = 1; i <= counter; i++) {
@@ -39,36 +43,36 @@ function addInput(divName, counter) {
         var sid = `sub${i}`;
         var tid = `tot${i}`;
         var cid = `cre${i}`;
-        var newdiv = document.createElement('div');
+        var newdiv = document.createElement("div");
         newdiv.innerHTML = `<div class='row'><div class='col-75'>     <label class="label success" style="min-width:100%;color: #0088cc;text-align: center;font-weight: bolder;padding: 0.5rem"> COURSE CODE SUBJECT - ${i} </label>
-</div><div class='col-25'> <input type="text" class=" evaluation_tokens" maxlength="12" placeholder="COURSE CODE" id='${courseid}' >  </div>  </div>
-<div class='row'><div class='col-75'>     <label class="label success" style="min-width:100%;color: #0088cc;text-align: center;font-weight: bolder;padding: 0.5rem"> CREDITS OF SUBJECT - ${i} </label>
-</div><div class='col-25'> 
-  <select id="${cid}" style="text-align: center; text-align-last: center;" class="evaluation_tokens">
-                        <option value="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                            </select>  </div>  </div>
-<div class='row'><div class='col-75'>     <label class="label success" style="min-width:100%;color: #0088cc;text-align: center;font-weight: bolder;padding: 0.5rem"> MARKS OBTAINED SUBJECT - ${i} </label>
-</div><div class='col-25'> <input type="number" class=" evaluation_tokens ev_tok_mk_obt" max="100" onkeyup="if (this.value[this.value.length - 1] == '.') this.value = this.value.substr(0, this.value.length - 1); if (parseFloat(this.value) > 100) this.value = '100';" placeholder="MARKS " id='${sid}' >  </div>  </div>
-<div class='row'><div class='col-75'>     <label class="label success" style="min-width:100%;color: #0088cc;text-align: center;font-weight: bolder;padding: 0.5rem"> TOTAL MARKS SUBJECT - ${i} </label>
-</div><div class='col-25'> <input type="number" class=" evaluation_tokens" value="100" readonly id='${tid}' >  </div>  </div>
-
-<div class='row'><div class='col-75'>     <label class="label success" style="min-width:100%;color: #0088cc;text-align: center;font-weight: bolder;padding: 0.5rem"> YEAR OF PASSING SUBJECT - ${i} </label>
-</div><div class='col-25'>            <input  type="number" class="yearpicker evaluation_tokens year_of_passing_class" value="" id="${yopid}" placeholder="YEAR OF PASSING" readonly>
-</div><br><br><hr style="color:black;margin-top:1rem; border-top: 1px dotted red; height: 10px;
-border: 0;
-box-shadow: 0 5px 5px -5px grey inset;height: 3px;width:98.5%">`;
+  </div><div class='col-25'> <input type="text" class=" evaluation_tokens" maxlength="12" placeholder="COURSE CODE" id='${courseid}' >  </div>  </div>
+  <div class='row'><div class='col-75'>     <label class="label success" style="min-width:100%;color: #0088cc;text-align: center;font-weight: bolder;padding: 0.5rem"> CREDITS OF SUBJECT - ${i} </label>
+  </div><div class='col-25'> 
+    <select id="${cid}" style="text-align: center; text-align-last: center;" class="evaluation_tokens">
+                          <option value="0">0</option>
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
+                                  <option value="5">5</option>
+                                  <option value="6">6</option>
+                                  <option value="7">7</option>
+                                  <option value="8">8</option>
+                              </select>  </div>  </div>
+  <div class='row'><div class='col-75'>     <label class="label success" style="min-width:100%;color: #0088cc;text-align: center;font-weight: bolder;padding: 0.5rem"> MARKS OBTAINED SUBJECT - ${i} </label>
+  </div><div class='col-25'> <input type="number" class=" evaluation_tokens ev_tok_mk_obt" max="100" onkeyup="if (this.value[this.value.length - 1] == '.') this.value = this.value.substr(0, this.value.length - 1); if (parseFloat(this.value) > 100) this.value = '100';" placeholder="MARKS " id='${sid}' >  </div>  </div>
+  <div class='row'><div class='col-75'>     <label class="label success" style="min-width:100%;color: #0088cc;text-align: center;font-weight: bolder;padding: 0.5rem"> TOTAL MARKS SUBJECT - ${i} </label>
+  </div><div class='col-25'> <input type="number" class=" evaluation_tokens" value="100" readonly id='${tid}' >  </div>  </div>
+  
+  <div class='row'><div class='col-75'>     <label class="label success" style="min-width:100%;color: #0088cc;text-align: center;font-weight: bolder;padding: 0.5rem"> YEAR OF PASSING SUBJECT - ${i} </label>
+  </div><div class='col-25'>            <input  type="number" class="yearpicker evaluation_tokens year_of_passing_class" value="" id="${yopid}" placeholder="YEAR OF PASSING" readonly>
+  </div><br><br><hr style="color:black;margin-top:1rem; border-top: 1px dotted red; height: 10px;
+  border: 0;
+  box-shadow: 0 5px 5px -5px grey inset;height: 3px;width:98.5%">`;
         document.getElementById(divName).appendChild(newdiv);
         //console.log(i);
     }
-    $('.yearpicker').yearpicker();
+    $(".yearpicker").yearpicker();
     init_int_check();
 }
 
@@ -96,18 +100,14 @@ function getValue() {
         //console.log(Asco);
         //console.log(Atot);
         //console.log(Acre);
-
-
     }
-
 }
-
 
 function CalPer() {
     for (i = 0; i < total; i++) {
-        var per = (Asco[i] / Atot[i]) * 100
-            //console.log(per);
-            //Aper.push(per);
+        var per = (Asco[i] / Atot[i]) * 100;
+        //console.log(per);
+        //Aper.push(per);
         Aper[i] = per;
     }
 }
@@ -115,26 +115,26 @@ function CalPer() {
 function CalGradCase(val) {
     //console.log("Val in CalGradeCase: " + val);
     switch (true) {
-        case (val >= 90):
+        case val >= 90:
             return 10;
             break;
-        case (val < 90 && val >= 80):
+        case val < 90 && val >= 80:
             return 9;
             break;
-        case (val < 80 && val >= 70):
+        case val < 80 && val >= 70:
             return 8;
             break;
-        case (val < 70 && val >= 60):
+        case val < 70 && val >= 60:
             return 7;
             break;
-        case (val < 60 && val >= 50):
+        case val < 60 && val >= 50:
             return 6;
             break;
-        case (val < 50 && val >= 40):
+        case val < 50 && val >= 40:
             return 5;
             break;
 
-        case (val < 40):
+        case val < 40:
             return 0;
             break;
         default:
@@ -172,7 +172,7 @@ function CalSubSol() {
 }
 
 function DisSGPA(i) {
-    var newdiv = document.createElement('div');
+    var newdiv = document.createElement("div");
     newdiv.innerHTML = `Your SGPA is <big>${i}</big> `;
     document.getElementById("SGPAResult").appendChild(newdiv);
 }
@@ -188,30 +188,29 @@ function TotalScore() {
 function GradeToLetter(G) {
     switch (G) {
         case 10:
-            return 'S';
+            return "S";
             break;
         case 9:
-            return 'A';
+            return "A";
             break;
         case 8:
-            return 'B';
+            return "B";
             break;
         case 7:
-            return 'C';
+            return "C";
             break;
         case 6:
-            return 'D';
+            return "D";
             break;
         case 5:
-            return 'E';
+            return "E";
             break;
 
         case 0:
-            return 'F';
+            return "F";
             break;
         default:
-            return 'Error';
-
+            return "Error";
     }
 }
 
@@ -229,7 +228,7 @@ function DisTable(i) {
     var cell8 = row.insertCell(7);
     cell1.innerHTML = course[i];
     cell2.innerHTML = Asco[i];
-    cell3.innerHTML = (Aper[i]).toPrecision(3) + " %";
+    cell3.innerHTML = Aper[i].toPrecision(3) + " %";
     cell4.innerHTML = Acre[i];
     cell5.innerHTML = Agrd[i];
     cell6.innerHTML = GradeToLetter(Agrd[i]);
@@ -271,34 +270,32 @@ function DisTabTotal(i) {
 
     cell1.innerHTML = "FINAL SGPA";
     cell2.innerHTML = TotalScore();
-    cell3.innerHTML = (TotalPer()) + " %";
+    cell3.innerHTML = TotalPer() + " %";
     cell4.innerHTML = CalTotalCred();
     cell5.innerHTML = TotalGrad();
     cell6.innerHTML = "-";
     cell7.innerHTML = CalSubSol();
-
 }
 
 function DisSGPATotal() {
-    var newdiv = document.createElement('div');
+    var newdiv = document.createElement("div");
     newdiv.innerHTML = `SGPA = ${CalSubSol()} / ${CalTotalCred()} =  ${SGPA}`;
     document.getElementById("FinalSGPA").appendChild(newdiv);
 }
 
 function DisSGPATotal_cgpa() {
-    var newdiv_cgpa = document.createElement('div');
+    var newdiv_cgpa = document.createElement("div");
     newdiv_cgpa.innerHTML = `CGPA = ${totSubsol_cgpa} / ${totCre_cgpa} =  ${CGPA_cgpa}`;
     document.getElementById("FinalCGPA_cgpa").appendChild(newdiv_cgpa);
 }
 
 function DisCGPAPer() {
-    var newdiv_cgpa = document.createElement('div');
+    var newdiv_cgpa = document.createElement("div");
     var result = ((CGPA_cgpa - 0.75) * 10).toPrecision(4);
     newdiv_cgpa.innerHTML = `PERCENTAGE =  ${result}%`;
 
     document.getElementById("cgpatoper1").appendChild(newdiv_cgpa);
 }
-
 
 // function DisSGPAPer() {
 //     var newdiv = document.createElement('div');
@@ -307,25 +304,29 @@ function DisCGPAPer() {
 //     document.getElementById("sgpatoper").appendChild(newdiv);
 // }
 
-
-
 function calculate() {
-    $('.ev_tok_mk_obt').each((_n, _el) => {
+    $(".ev_tok_mk_obt").each((_n, _el) => {
         if (_el.value) {
             if (_el.value > 100 || _el.value < 0) {
-                swal("INVALID INPUT!", "MARKS SHOULD NOT BE MORE THAN 100/LESS THAN 0", "warning");
+                swal(
+                    "INVALID INPUT!",
+                    "MARKS SHOULD NOT BE MORE THAN 100/LESS THAN 0",
+                    "warning"
+                );
                 return;
             }
         }
     });
-    $('.ev_tok_mk_obt1').each((_n, _el) => {
+    $(".ev_tok_mk_obt1").each((_n, _el) => {
         if (_el.value) {
             if (_el.value > 10 || _el.value < 0)
-                swal("INVALID INPUT!", "SGPA SHOULD NOT BE MORE THAN 10/LESS THAN 0", "warning");
-
+                swal(
+                    "INVALID INPUT!",
+                    "SGPA SHOULD NOT BE MORE THAN 10/LESS THAN 0",
+                    "warning"
+                );
         }
     });
-
 
     getValue();
     CalPer();
@@ -348,7 +349,6 @@ function calculate() {
     DisSGPATotal();
     // DisSGPAPer();
 
-
     document.getElementById("Step2").style.display = "none";
     document.getElementById("Step3").style.display = "block";
     var elmnt = document.getElementById("Step3");
@@ -361,44 +361,51 @@ function calculate() {
     var result = ((CGPA_cgpa - 0.75) * 10).toPrecision(4);
     DisCGPAPer();
     DisCGPA_cgpa(CGPA_cgpa);
-    for (i = 0; i < total_cgpa; i++) {
+    for (i = 0; i < total_cgpa - 1; i++) {
         DisTable_cgpa(i);
     }
     DisTabTotal_cgpa(total_cgpa);
-    DisSGPATotal_cgpa()
+    DisSGPATotal_cgpa();
+
+    total_cgpa = document.getElementById("total_cgpa").value;
+    let doBlock = true;
+    if (parseInt(total_cgpa) == 1 || !parseInt(total_cgpa)) {
+        doBlock = false;
+    }
+    //alert(total);
+    addInput_cgpa("dynamicInput_cgpa", total_cgpa);
+    document.getElementById("Step3_cgpa").style.display = "none";
+
+
     document.getElementById("Step2_cgpa").style.display = "none";
-    document.getElementById("Step3_cgpa").style.display = "block";
+    if (doBlock)
+        document.getElementById("Step3_cgpa").style.display = "block";
     var elmnt_cgpa = document.getElementById("Step3_cgpa");
     elmnt_cgpa.scrollIntoView();
 }
 
-
 function ClearData() {
     var okToRefresh = swal({
-            title: "ARE YOU SURE TO CLEAR THE DATA?",
-            text: "MAKE SURE TO DOWNLOAD, BEFORE CLEARING!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-        .then((willDelete) => {
-            if (willDelete) {
-                swal("YOUR DATA HAS BEEN ERASED!", {
-                    icon: "success",
-                });
-                if (okToRefresh) {
-                    setTimeout("location.reload(true);", 1500);
-                    var elmnt = document.getElementById("Step1");
-                    elmnt.scrollIntoView();
-                }
-            } else {
-                swal("DATA STILL SAFE!");
+        title: "ARE YOU SURE TO CLEAR THE DATA?",
+        text: "MAKE SURE TO DOWNLOAD, BEFORE CLEARING!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            swal("YOUR DATA HAS BEEN ERASED!", {
+                icon: "success",
+            });
+            if (okToRefresh) {
+                setTimeout("location.reload(true);", 1500);
+                var elmnt = document.getElementById("Step1");
+                elmnt.scrollIntoView();
             }
-        });
-
+        } else {
+            swal("DATA STILL SAFE!");
+        }
+    });
 }
-
-
 
 function test() {
     alert("Working");
@@ -414,7 +421,7 @@ var ASol_cgpa = [];
 function showMarks_cgpa() {
     total_cgpa = document.getElementById("total_cgpa").value;
     //alert(total);
-    addInput_cgpa('dynamicInput_cgpa', total_cgpa);
+    addInput_cgpa("dynamicInput_cgpa", total_cgpa);
     document.getElementById("Step1_cgpa").style.display = "none";
     document.getElementById("Step2_cgpa").style.display = "block";
     var elmnt_cgpa = document.getElementById("Step2_cgpa");
@@ -422,30 +429,32 @@ function showMarks_cgpa() {
 }
 
 function addInput_cgpa(divName_cgpa, counter_cgpa) {
-    for (i = 1; i <= counter_cgpa - 1; i++) {
+    for (i = 0; i <= counter_cgpa - 2; i++) {
         //var nid = id;
         var cid_cgpa = `cre_cgpa${i}`;
         var sid_cgpa = `sgp_cgpa${i}`;
-        var newdiv_cgpa = document.createElement('div');
-        newdiv_cgpa.innerHTML = `<div class='row'><div class='col-75'>     <label class="label success" style="min-width:100%;color: #0088cc;text-align: center;font-weight: bolder;padding: 0.5rem"> CREDITS OF SEMESTER - ${i} : </label>
-</div><div class='col-25'> <input type="number" maxlength="2" class=" evaluation_tokens"  max="100" onkeyup="if (this.value[this.value.length - 1] == '.') this.value = this.value.substr(0, this.value.length - 1); if (parseFloat(this.value) > 100) this.value = '100';" placeholder="CREDITS" id='${cid_cgpa}' >  </div> </div>
-    <div class='row'><div class='col-75'> <label class="label success" style="min-width:100%;color: #0088cc;text-align: center;font-weight: bolder;padding: 0.5rem"> SGPA OF SEMESTER - ${i} : </label></div><div class='col-25'>  <input type="number" max="10" onkeyup="if (this.value[this.value.length - 1] == '.') this.value = this.value.substr(0, this.value.length - 1); if (parseFloat(this.value) > 10) this.value = '10';" placeholder="SGPA" id='${sid_cgpa}' ></div> </div>
-    <hr style="border: 0;
-    box-shadow: 0 5px 5px -5px grey inset;height: 3px;">`;
+        var newdiv_cgpa = document.createElement("div");
+        newdiv_cgpa.innerHTML = `<div class='row'><div class='col-75'>     <label class="label success" style="min-width:100%;color: #0088cc;text-align: center;font-weight: bolder;padding: 0.5rem"> CREDITS OF SEMESTER - ${
+        i + 1
+      } : </label>
+  </div><div class='col-25'> <input type="number" maxlength="2" class=" evaluation_tokens"  max="100" onkeyup="if (this.value[this.value.length - 1] == '.') this.value = this.value.substr(0, this.value.length - 1); if (parseFloat(this.value) > 100) this.value = '100';" placeholder="CREDITS" id='${cid_cgpa}' >  </div> </div>
+      <div class='row'><div class='col-75'> <label class="label success" style="min-width:100%;color: #0088cc;text-align: center;font-weight: bolder;padding: 0.5rem"> SGPA OF SEMESTER - ${
+        i + 1
+      } : </label></div><div class='col-25'>  <input type="number" max="10" onkeyup="if (this.value[this.value.length - 1] == '.') this.value = this.value.substr(0, this.value.length - 1); if (parseFloat(this.value) > 10) this.value = '10';" placeholder="SGPA" id='${sid_cgpa}' ></div> </div>
+      <hr style="border: 0;
+      box-shadow: 0 5px 5px -5px grey inset;height: 3px;">`;
         document.getElementById(divName_cgpa).appendChild(newdiv_cgpa);
         ////console.log(i);
     }
 }
 
-
 function getValue_cgpa() {
     var tempTotal_cgpa = total_cgpa;
-    for (i = 1; i <= tempTotal_cgpa - 1; i++) {
+    for (i = 0; i <= tempTotal_cgpa - 2; i++) {
         var credid_cgpa = document.getElementById(`cre_cgpa${i}`).value;
         Acre_cgpa.push(credid_cgpa);
         var sgpaid_cgpa = document.getElementById(`sgp_cgpa${i}`).value;
         ASGPA_cgpa.push(sgpaid_cgpa);
-
 
         // console.log("Test");
         // console.log(i);
@@ -455,7 +464,6 @@ function getValue_cgpa() {
         // console.log("Array");
         // console.log(Acre_cgpa);
         // console.log(ASGPA_cgpa);
-
     }
 }
 
@@ -485,7 +493,7 @@ function CalTotSubsol_cgpa() {
 }
 
 function DisCGPA_cgpa(i) {
-    var newdiv_cgpa = document.createElement('div');
+    var newdiv_cgpa = document.createElement("div");
     newdiv_cgpa.innerHTML = `YOUR CGPA IS <big>${i}</big> `;
     document.getElementById("CGPAResult_cgpa").appendChild(newdiv_cgpa);
 }
@@ -503,7 +511,7 @@ function DisTable_cgpa(i) {
     cell1_cgpa.innerHTML = "SEMESTER " + temp_cgpa;
     cell2_cgpa.innerHTML = ASGPA_cgpa[i];
     cell3_cgpa.innerHTML = Acre_cgpa[i];
-    cell4_cgpa.innerHTML = ASol_cgpa[i];
+    cell4_cgpa.innerHTML = ASol_cgpa[i].toPrecision(4);
 }
 
 function CalTotSGPA_cgpa() {
@@ -516,7 +524,7 @@ function CalTotSGPA_cgpa() {
 }
 
 function DisTabTotal_cgpa(i) {
-    temp_cgpa = parseInt(i) + 1;
+    temp_cgpa = parseInt(i);
     var table_cgpa = document.getElementById("CGPATable_cgpa");
     var row_cgpa = table_cgpa.insertRow(temp_cgpa);
     var cell1_cgpa = row_cgpa.insertCell(0);
@@ -527,23 +535,21 @@ function DisTabTotal_cgpa(i) {
     cell2_cgpa.innerHTML = CalTotSGPA_cgpa();
     cell3_cgpa.innerHTML = totCre_cgpa;
     cell4_cgpa.innerHTML = totSubsol_cgpa.toFixed(2);
-
-
 }
 
 function DisSGPATotal_cgpa() {
-    var newdiv_cgpa = document.createElement('div');
-    newdiv_cgpa.innerHTML = `CGPA = ${totSubsol_cgpa.toFixed(2)} / ${totCre_cgpa} =  ${CGPA_cgpa}`;
+    var newdiv_cgpa = document.createElement("div");
+    newdiv_cgpa.innerHTML = `CGPA = ${totSubsol_cgpa.toFixed(
+      2
+    )} / ${totCre_cgpa} =  ${CGPA_cgpa}`;
     document.getElementById("FinalCGPA_cgpa").appendChild(newdiv_cgpa);
 }
 
 function DisSGPATotal_cgpaper() {
-    var newdiv_cgpa = document.createElement('div');
-    newdiv_cgpa.innerHTML = `CGPA = ${(CGPA_cgpa - 0.75)*10}`;
+    var newdiv_cgpa = document.createElement("div");
+    newdiv_cgpa.innerHTML = `CGPA = ${(CGPA_cgpa - 0.75) * 10}`;
     document.getElementById("FinalCGPA_cgpaper").appendChild(newdiv_cgpa);
 }
-
-
 
 function calculate_cgpa() {
     getValue_cgpa();
@@ -553,7 +559,7 @@ function calculate_cgpa() {
     CGPA_cgpa = (totSubsol_cgpa / totCre_cgpa).toFixed(4);
     //console.log("CGPA is :" + CGPA);
     DisCGPA_cgpa(CGPA_cgpa);
-    for (i = 0; i < total_cgpa - 1; i++) {
+    for (i = 0; i < total_cgpa - 2; i++) {
         DisTable_cgpa(i);
     }
     DisTabTotal_cgpa(total_cgpa);
@@ -565,31 +571,27 @@ function calculate_cgpa() {
     elmnt_cgpa.scrollIntoView();
 }
 
-
-
 function ClearData() {
     var okToRefresh = swal({
-            title: "ARE YOU SURE TO CLEAR THE DATA?",
-            text: "MAKE SURE TO DOWNLOAD, BEFORE CLEARING!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-        .then((willDelete) => {
-            if (willDelete) {
-                swal("YOUR DATA HAS BEEN ERASED!", {
-                    icon: "success",
-                });
-                if (okToRefresh) {
-                    setTimeout("location.reload(true);", 150);
-                    var elmnt = document.getElementById("Step1");
-                    elmnt.scrollIntoView();
-                }
-            } else {
-                swal("DATA STILL SAFE!");
+        title: "ARE YOU SURE TO CLEAR THE DATA?",
+        text: "MAKE SURE TO DOWNLOAD, BEFORE CLEARING!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            swal("YOUR DATA HAS BEEN ERASED!", {
+                icon: "success",
+            });
+            if (okToRefresh) {
+                setTimeout("location.reload(true);", 150);
+                var elmnt = document.getElementById("Step1");
+                elmnt.scrollIntoView();
             }
-        });
-
+        } else {
+            swal("DATA STILL SAFE!");
+        }
+    });
 }
 
 let name = localStorage.getItem("name-key");
@@ -603,7 +605,7 @@ document.getElementById("branch").innerHTML = branch;
 document.getElementById("semester").innerHTML = semester;
 
 for (let i = 0; i < document.getElementsByClassName("name").length; i++) {
-    document.getElementsByClassName("name")[i].innerHTML = name
+    document.getElementsByClassName("name")[i].innerHTML = name;
 }
 
 document.onreadystatechange = function() {
@@ -614,36 +616,81 @@ document.onreadystatechange = function() {
         $("#loader-img").addClass("loaded-img");
         $("#preloader").addClass("loaded-img");
     }
+};
+
+var branch_info = document.getElementById("branch");
+console.log(branch_info)
+if (branch_info.innerHTML === "CSE") {
+    document.getElementById("branch_link").innerHTML = ` <span><a target="_blank" href="https://bmsce.ac.in/home/Computer-Science-and-Engineering-Syllabus">CLICK HERE</a></span> `;
+} else if (branch_info.innerHTML === "ISE") {
+    document.getElementById("branch_link").innerHTML = ` <span><a target="_blank" href="https://bmsce.ac.in/home/Information-Science-and-Engineering-Syllabus">CLICK HERE</a></span> `;
+} else if (branch_info.innerHTML === "BIOTECHNOLOGY") {
+    document.getElementById("branch_link").innerHTML = ` <span><a target="_blank" href="https://bmsce.ac.in/home/Bio-Technology-Syllabus">CLICK HERE</a></span> `;
+} else if (branch_info.innerHTML === "ECE") {
+    document.getElementById("branch_link").innerHTML = ` <span><a target="_blank" href="https://bmsce.ac.in/home/Electronics-and-Communication-Engineering-Syllabus">CLICK HERE</a></span> `;
+} else if (branch_info.innerHTML === "EEE") {
+    document.getElementById("branch_link").innerHTML = ` <span><a target="_blank" href="https://bmsce.ac.in/home/Electrical-and-Electronics-Engineering-Syllabus">CLICK HERE</a></span> `;
+} else if (branch_info.innerHTML === "EIE") {
+    document.getElementById("branch_link").innerHTML = ` <span><a target="_blank" href="https://bmsce.ac.in/home/Electronics-and-Instrumentation-Engineering-Syllabus">CLICK HERE</a></span> `;
+} else if (branch_info.innerHTML === "ETC") {
+    document.getElementById("branch_link").innerHTML = ` <span><a target="_blank" href="https://bmsce.ac.in/home/Electronics-and-Telecommunication-Engineering-Syllabus">CLICK HERE</a></span> `;
+} else if (branch_info.innerHTML === "MECHANICAL") {
+    document.getElementById("branch_link").innerHTML = ` <span><a target="_blank" href="https://bmsce.ac.in/home/Mechanical-Engineering-Syllabus">CLICK HERE</a></span> `;
+} else if (branch_info.innerHTML === "AIML") {
+    document.getElementById("branch_link").innerHTML = ` <span><a target="_blank" href="https://bmsce.ac.in/home/">CLICK HERE</a></span> `;
+} else if (branch_info.innerHTML === "CIVIL") {
+    document.getElementById("branch_link").innerHTML = ` <span><a target="_blank" href="https://bmsce.ac.in/home/Civil-Engineering-Syllabus">CLICK HERE</a></span> `;
+} else if (branch_info.innerHTML === "MEDICAL ELECTRONICS") {
+    document.getElementById("branch_link").innerHTML = ` <span><a target="_blank" href="https://bmsce.ac.in/home/Medical-Electronics-Syllabus">CLICK HERE</a></span> `;
+} else if (branch_info.innerHTML === "IEM") {
+    document.getElementById("branch_link").innerHTML = ` <span><a target="_blank" href="https://bmsce.ac.in/home/Industrial-Engineering-and-Management-Syllabus">CLICK HERE</a></span> `;
+} else if (branch_info.innerHTML === "CHEMICAL") {
+    document.getElementById("branch_link").innerHTML = ` <span><a target="_blank" href="https://bmsce.ac.in/home/Chemical-Engineering-Syllabus">CLICK HERE</a></span> `;
+} else if (branch_info.innerHTML === "AEROSPACE") {
+    document.getElementById("branch_link").innerHTML = ` <span><a target="_blank" href="https://bmsce.ac.in/home/Aerospace-Engineering-Syllabus">CLICK HERE</a></span> `;
+} else if (branch_info.innerHTML === "MCA") {
+    document.getElementById("branch_link").innerHTML = ` <span><a target="_blank" href="https://bmsce.ac.in/home/Aerospace-Engineering-Syllabus">CLICK HERE</a></span> `;
+} else if (branch_info.innerHTML === "MTECH") {
+    document.getElementById("branch_link").innerHTML = ` <span><a target="_blank" href="https://bmsce.ac.in/home/">CLICK HERE</a></span> `;
 }
 
 const init_int_check = () => {
     setInterval(() => {
         let allEvalled = true;
-        $('.evaluation_tokens').each((_n, _el) => {
+        $(".evaluation_tokens").each((_n, _el) => {
             if (!_el.value.length && allEvalled && !_el.disabled) {
                 allEvalled = false;
             }
         });
         if (allEvalled) {
-            document.getElementById('__lets_calc_btn').disabled = false;
-            document.getElementById('__lets_calc_btn').classList.remove('btn-disabled');
+            document.getElementById("__lets_calc_btn").disabled = false;
+            document
+                .getElementById("__lets_calc_btn")
+                .classList.remove("btn-disabled");
         } else {
-            document.getElementById('__lets_calc_btn').disabled = true;
-            document.getElementById('__lets_calc_btn').classList.add('btn-disabled');
+            document.getElementById("__lets_calc_btn").disabled = true;
+            document.getElementById("__lets_calc_btn").classList.add("btn-disabled");
         }
 
-        $('.ev_tok_mk_obt').each((n, el) => {
+        $(".ev_tok_mk_obt").each((n, el) => {
             // console.log(document.getElementsByClassName('year_of_passing_class'), n);
             if (el.value < 40) {
-                if (document.getElementsByClassName('year_of_passing_class')[n].value.length)
-                    document.getElementsByClassName('year_of_passing_class')[n].value = "";
-                document.getElementsByClassName('year_of_passing_class')[n].disabled = true;
+                if (
+                    document.getElementsByClassName("year_of_passing_class")[n].value
+                    .length
+                )
+                    document.getElementsByClassName("year_of_passing_class")[n].value =
+                    "";
+                document.getElementsByClassName("year_of_passing_class")[
+                    n
+                ].disabled = true;
                 // document.getElementsByClassName('yearpicker-container')[n].style.display = 'none';
             } else {
-                document.getElementsByClassName('year_of_passing_class')[n].disabled = false;
+                document.getElementsByClassName("year_of_passing_class")[
+                    n
+                ].disabled = false;
                 // document.getElementsByClassName('yearpicker-container')[n].style.display = 'block';
             }
         });
     }, 500);
-
-}
+};
