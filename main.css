@@ -2,6 +2,7 @@
 * {
     font-family: 'quicksand', Arial, Helvetica, sans-serif;
     box-sizing: border-box;
+    font-weight: bolder;
 }
 
 body {
@@ -1076,7 +1077,7 @@ body {
 }
 
 label {
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 #loader:after {
@@ -1915,7 +1916,7 @@ body {
 }
 
 label {
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 #loader:after {
@@ -2115,7 +2116,7 @@ textarea {
     border-radius: 4px;
     box-sizing: border-box;
     resize: vertical;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 
@@ -2230,7 +2231,7 @@ tr:nth-child(even) {
 }
 
 input {
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 
@@ -2245,7 +2246,7 @@ textarea {
     border-radius: 4px;
     box-sizing: border-box;
     resize: vertical;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 
@@ -2360,7 +2361,7 @@ tr:nth-child(even) {
 }
 
 input {
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 select {
