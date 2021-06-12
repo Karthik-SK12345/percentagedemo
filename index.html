@@ -23,7 +23,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
-    <title>SGPA/CGPA/% CALCULATOR</title>
+    <title>BMSCE GP CALCULATOR</title>
     <link rel="icon" href="/assets/images/title-image.png" type="image/icon type">
     <link rel="stylesheet" href="/assets/css/index.css">
 </head>
@@ -44,6 +44,7 @@
         }
     }
 </style>
+
 <!-- example 1 - using absolute position for center -->
 <!-- <nav class="navbar navbar-expand-md navbar-faded bg-faded">
     <a class="navbar-brand abs" href="#">GRADE POINT CALCULATOR</a>
@@ -231,7 +232,19 @@ example 3 - Navbar with brand left, links on center and right that collapse into
 
     <img src="/assets/images/bmsce.png" class="img-fluid" alt="..." style="padding: 1rem;float: right;">
 </center> -->
-
+<style>
+    #list img {
+        max-width: 300px;
+        height: 100px;
+        border: 1px solid grey;
+        border-radius: 0.5rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    #deleteImgs {
+        display: none;
+    }
+</style>
 <label class="label success" style="min-width:100%;background-color: #0088cc;padding: 1rem;color: white;text-align: center;">GP CALCULATOR FOR BE, MCA, MTECH</label>
 
 <body>
@@ -265,7 +278,7 @@ example 3 - Navbar with brand left, links on center and right that collapse into
 
                 <!-- <span style="margin-right: 0.85rem;">BRANCH : </span>  -->
                 <span style="margin-right: 0.85rem;">BRANCH : </span> <select id="branch">
-                    <option value="CSE" selected>CSE</option>
+                    <option value="CSE" >CSE</option>
                     <option value="ISE" >ISE</option>
                     <option value="BIOTECHNOLOGY">BIOTECHNOLOGY</option>
                     <option value="ECE">ECE</option>
@@ -278,7 +291,9 @@ example 3 - Navbar with brand left, links on center and right that collapse into
                     <option value="MEDICAL ELECTRONICS">MEDICAL ELECTRONICS</option>
                     <option value="IEM">IEM</option>
                     <option value="CHEMICAL">CHEMICAL</option>
-                    <option value="AEROSPACE">AEROSPACE</option></select>
+                    <option value="AEROSPACE">AEROSPACE</option>
+                    <option value="AEROSPACE">MTECH</option>
+                    <option value="AEROSPACE">MCA</option></select>
                 <!-- <input type="text" class="input" name="branch" id="branch" placeholder="BRANCH" maxlength="5" required> -->
                 <p style="
               color: #002bff;">* (Select your branch from above) </p>
@@ -294,13 +309,29 @@ example 3 - Navbar with brand left, links on center and right that collapse into
             </select>
                 <p style="
              color: #002bff;">* (Select your semester from above) </p>
+
+
+                <!-- <p>Select images, they will be stored in your browser and will be displayed even after reload. Selecting big images (&gt; 2MB) can crash your browser.</p> -->
+                <span style="margin-right: 1.8rem;">IMAGE : </span> <input type="file" id="files">
+                <p style="
+                color: #002bff;">* (Select your Image to Print On Marks Card. Not Mandatory) </p>
+
+                <p id="state" style="display: none;">No images stored in your browser.</p>
+
+                <div id="list">
+                </div>
+
+                <a href="#" id="deleteImgs">Delete Image</a><br>
+
                 <div class="btn-group" style="margin-top: 1rem;">
-                    <button class="glow-on-hover" name="submit" value="SUBMIT" id="submitBtn" style="margin-bottom: 1rem;  background: #042893;color:white;text-transform:uppercase; font-weight: bolder;box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);margin-right: 1rem;">SUBMIT</button>
+                    <button class="glow-on-hover" name="submit" value="SUBMIT" id="submitBtn" style="margin-bottom: 1rem;  background: #042893;color:white;text-transform:uppercase; font-weight: bolder;box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);margin-right: 1rem;"
+                        disabled>SUBMIT</button>
 
                     <button class="glow-on-hover1" value="reset" type="reset" style="  background-color: #042893;text-transform:uppercase; font-weight: bolder;box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);">RESET</button>
                     <br><br>
 
                 </div>
+
                 <!-- <button class="glow-on-hover" name="submit" value="SUBMIT" id="submitBtn" style="margin-bottom: 1rem;  background: #57b846;;text-transform:uppercase; font-weight: bolder;box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);">SUBMIT</button>
 
                 <h6 id="info" style="font-weight: bolder;"></h6>
@@ -540,5 +571,93 @@ example 3 - Navbar with brand left, links on center and right that collapse into
         document.getElementsByClassName("name")[i].innerHTML = name
     }
 </script>
+<script>
+    const _xid = ['branch', 'semester', 'usn', 'name'];
+    setInterval(() => {
+        for (const x of _xid) {
+            if (!document.getElementById(x).value) return;
+        }
+        document.getElementById('submitBtn').disabled = false;
+    }, 1000);
+</script>
+
+
+
+<script>
+    var imagesObject = [];
+
+    function handleFileSelect(evt) {
+        var files = evt.target.files; // FileList object
+
+        // Loop through the FileList and render image files as thumbnails.
+        for (var i = 0, f; f = files[i]; i++) {
+
+            // Only process image files.
+            if (!f.type.match('image.*')) {
+                continue;
+            }
+
+            var reader = new FileReader();
+
+            // Closure to capture the file information.
+            reader.onload = function(e) {
+                displayImgData(e.target.result)
+                addImage(e.target.result);
+            };
+
+            reader.readAsDataURL(f);
+        }
+    }
+
+    function loadFromLocalStorage() {
+        var images = JSON.parse(localStorage.getItem("images"))
+
+        if (images) {
+            imagesObject = images;
+
+            displayNumberOfImgs();
+            images.forEach(displayImgData);
+        }
+    }
+
+    function addImage(imgData) {
+        imagesObject.push(imgData);
+        displayNumberOfImgs();
+        localStorage.setItem("images", JSON.stringify(imagesObject));
+    }
+
+    function displayImgData(imgData) {
+        var span = document.createElement('span');
+        span.innerHTML = '<img class="thumb" src="' + imgData + '"/>';
+        document.getElementById('list').insertBefore(span, null);
+    }
+
+    function displayNumberOfImgs() {
+        if (imagesObject.length > 0) {
+
+            document.getElementById("state").innerHTML = imagesObject.length + " image" + ((imagesObject.length > 1) ? "s" : "") + " stored in your browser";
+
+            document.getElementById("deleteImgs").style.display = "inline";
+
+        } else {
+            document.getElementById("state").innerHTML = "No images stored in your browser.";
+            document.getElementById("deleteImgs").style.display = "none";
+        }
+
+
+    }
+
+    function deleteImages() {
+        imagesObject = [];
+        localStorage.removeItem("images");
+        displayNumberOfImgs()
+        document.getElementById('list').innerHTML = "";
+    }
+
+    document.getElementById('files').addEventListener('change', handleFileSelect, false);
+    document.getElementById('deleteImgs').addEventListener("click", deleteImages);
+    loadFromLocalStorage();
+</script>
+
 
 </html>
